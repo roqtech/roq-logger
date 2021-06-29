@@ -1,11 +1,13 @@
 {
   "name": "@roq/logger",
-  "version": "1.0.0",
-  "main": ".eslintrc.js",
+  "version": "1.0.1",
+  "main": "dist/index",
+  "types": "dist/index",
   "dependencies": {
     "@google-cloud/logging": "^9.5.1",
     "@nestjs/common": "^7.6.18",
     "@nestjs/config": "^0.6.3",
+    "@nestjs/core": "^7.6.18",
     "@nestjs/graphql": "^7.11.0",
     "apollo-server-express": "^2.25.2",
     "graphql": "^15.5.1",
@@ -43,7 +45,8 @@
     "format:file": "prettier --write \"%npm_config_file%\"",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
     "lint:file": "eslint \"%npm_config_file%\" --fix",
-    "sniff": "eslint \"{src,test}/**/*.ts\" --fix -f json -o ./lint-report.json"
+    "sniff": "eslint \"{src,test}/**/*.ts\" --fix -f json -o ./lint-report.json",
+    "prepublish": "npm run build"
   },
   "husky": {
     "hooks": {
