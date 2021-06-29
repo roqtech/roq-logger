@@ -1,7 +1,6 @@
 {
-  "name": "logger",
+  "name": "@roq/logger",
   "version": "1.0.0",
-  "description": "",
   "main": ".eslintrc.js",
   "dependencies": {
     "@google-cloud/logging": "^9.5.1",
@@ -58,5 +57,14 @@
     ]
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roqtech/roq-logger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/roqtech/roq-logger/issues"
+  },
+  "homepage": "https://github.com/roqtech/roq-logger#readme",
+  "description": ""
 }
