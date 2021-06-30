@@ -31,6 +31,19 @@ export class LoggerMiddleware implements NestMiddleware {
           variables: req.body.variables,
         },
       });
+    } else if (!req.body.query) {
+      this.logger.log({
+        message: `HTTPRequest: ${req.method}`,
+        type: 'httprequest',
+        requestId: req.headers['request-id'],
+        caller: req.hostname,
+        api: {
+          type: 'httprequest',
+          headers: req.headers,
+          payload: req.body,
+          query: req.query,
+        },
+      });
     }
     next();
   }
