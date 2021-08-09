@@ -1,14 +1,15 @@
 {
   "name": "@roq/logger",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/index",
   "types": "dist/index",
   "dependencies": {
     "@google-cloud/logging": "^9.5.1",
-    "@nestjs/common": "^7.6.18",
-    "@nestjs/config": "^0.6.3",
-    "@nestjs/core": "^7.6.18",
-    "@nestjs/graphql": "^7.11.0",
+    "@nestjs/common": "^8.0.6",
+    "@nestjs/config": "^1.0.1",
+    "@nestjs/core": "^8.0.6",
+    "@nestjs/graphql": "^8.0.2",
+    "@nestjs/platform-express": "^8.0.6",
     "apollo-server-express": "^2.25.2",
     "graphql": "^15.5.1",
     "graphql-tools": "^7.0.5",
@@ -19,9 +20,9 @@
     "winston-transport": "^4.4.0"
   },
   "devDependencies": {
+    "@apollo/gateway": "^0.37.0",
+    "@roq/eslint-plugin": "^1.1.0",
     "@types/node": "^15.12.5",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.3.4",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "eslint-config-airbnb-base": "^14.2.0",
@@ -37,7 +38,9 @@
     "lint-staged": "^10.5.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.1.2",
-    "@roq/eslint-plugin": "^1.1.0"
+    "rimraf": "^3.0.2",
+    "ts-morph": "^11.0.3",
+    "typescript": "^4.3.4"
   },
   "scripts": {
     "build": "nest build",
