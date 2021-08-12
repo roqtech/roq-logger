@@ -42,6 +42,7 @@ export class LoggerMiddleware implements NestMiddleware {
           headers: req.headers,
           payload: req.body,
           query: req.query,
+          url: req.originalUrl,
         },
       });
     }

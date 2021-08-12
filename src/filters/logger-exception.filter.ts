@@ -1,9 +1,12 @@
-import { ArgumentsHost, Catch, Logger } from '@nestjs/common';
-import { GqlArgumentsHost, GqlExceptionFilter } from '@nestjs/graphql';
+import {ArgumentsHost, Catch, HttpServer, Logger} from '@nestjs/common';
+import { GqlArgumentsHost } from '@nestjs/graphql';
+import {BaseExceptionFilter} from "@nestjs/core";
 
 @Catch()
-export class LoggerExceptionFilter implements GqlExceptionFilter {
-  constructor(private logger: Logger) {}
+export class LoggerExceptionFilter extends BaseExceptionFilter {
+  constructor(private logger: Logger, applicationRef?: HttpServer) {
+    super(applicationRef);
+  }
   catch(exception: unknown, host: ArgumentsHost): void {
     if (exception instanceof Error) {
       const gqlHost = GqlArgumentsHost.create(host);
@@ -28,6 +31,7 @@ export class LoggerExceptionFilter implements GqlExceptionFilter {
           },
           exception.stack,
         );
+        super.catch(exception, host);
       }
     }
   }
