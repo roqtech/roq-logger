@@ -1,6 +1,6 @@
-import {ArgumentsHost, Catch, HttpServer, Logger} from '@nestjs/common';
+import { ArgumentsHost, Catch, HttpServer, Logger } from '@nestjs/common';
 import { GqlArgumentsHost } from '@nestjs/graphql';
-import {BaseExceptionFilter} from "@nestjs/core";
+import { BaseExceptionFilter } from '@nestjs/core';
 
 @Catch()
 export class LoggerExceptionFilter extends BaseExceptionFilter {
@@ -11,26 +11,41 @@ export class LoggerExceptionFilter extends BaseExceptionFilter {
     if (exception instanceof Error) {
       const gqlHost = GqlArgumentsHost.create(host);
       const gqlContext = gqlHost.getContext();
-      const req = gqlContext.req;
-      if (req) {
+      const gqlReq = gqlContext.req;
+      if (gqlReq) {
         this.logger.error(
           {
             message: `Error: ${exception.message}`,
             type: 'error',
             stack: exception.stack,
-            requestId: req.headers['request-id'],
+            requestId: gqlReq.headers['request-id'],
           },
           exception.stack,
         );
       } else {
-        this.logger.error(
-          {
-            message: `Error: ${exception.message}`,
-            type: 'error',
-            stack: exception.stack,
-          },
-          exception.stack,
-        );
+        const httpContext = host.switchToHttp();
+        const httpReq = httpContext.getRequest();
+        if (httpReq) {
+          this.logger.error(
+            {
+              message: `Error: ${exception.message}`,
+              type: 'error',
+              stack: exception.stack,
+              requestId: httpReq.headers['request-id'],
+            },
+            exception.stack,
+          );
+        } else {
+          this.logger.error(
+            {
+              message: `Error: ${exception.message}`,
+              type: 'error',
+              stack: exception.stack,
+            },
+            exception.stack,
+          );
+        }
+
         super.catch(exception, host);
       }
     }
